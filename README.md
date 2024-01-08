@@ -1,53 +1,25 @@
 # 376_W23_CPP_Basics
 
->**Note:** Everything you program must be named *exactly* as written here.   
+>**Note:** Everything you program must be named *exactly* as written here.  Pay attention to upper/lower case.
+>**Note:** There are a LOT of versions of C++.  If you run into questions, it is generally safe to look for C++2011 references unless otherwise noted.
 
 Time to learn the basics of C++.  
 
-Start with this sample code:
+**FIRST! -** Read the documentation at https://www.ibm.com/docs/en/zos/2.4.0?topic=only-overloading-operators-c.
 
-```C++
-#include <iostream>
-#include <vector>
+Write down any questions you have and bring them to class.
 
-class Matrix {
-private:
-    std::vector<std::vector<int> > data;
+## Tasks
 
-public:
-    // Constructor
-    Matrix(int rows, int cols) : data(rows, std::vector<int>(cols, 0)) {}
+1.  Create a class called ```Enemy```.  It should be broken up into a header file called ```enemy.h``` and a source file called ```enemy.cpp```.  It should have private instance variables called
+	- name (```std::string```).  Cannot be blank or longer than 25 charaters.
+	- hp (```int```).  Can't be less than zero.
+	- speed (```float```). Must be between 0 and 1.0 (inclusive). 
+	- Getters and setters for each property.  Naming convention must get ```getName```, ```setHp``` etc.
 
-    // Double parentheses overload
-    int& operator()(int row, int col) {
-        return data[row][col];
-    }
-};
+2.  Overload the ```<``` operator such that an instance is less than another instance when its ```hp``` is lower than the other instance.
 
-int main() {
-    Matrix matrix(3, 4);
-    matrix(0, 0) = 1;
-    matrix(1, 2) = 5;
+3.  Overload the ```>``` and ```==``` operators.  Don't rewrite logic; rewrite them in terms of one another.  For instance, ```==``` means not ```<``` and not ```>```.
 
-    std::cout << matrix(0, 0) << std::endl; // Output: 1
-    std::cout << matrix(1, 2) << std::endl; // Output: 5
-
-    return 0;
-}
-```
-
-Understand **every line of it**.  Write down your questions and bring them to me if you don't get any of it.  If I ask you which part you don't understand, DON'T TELL ME YOU DON'T UNDERSTAND ANY OF IT.  You have the Internet, ChatGPT (yes you can use it on *this* assignment), and other people to consult with.  Come to me with what you have tried and why that didn't work.
-
-This simple assignment requires you to do the following:
-
-1.  Create a Chessboard class.  Break it into two files - ```chessboard.h``` for the header and ```chessboard.cpp``` for the source.  It should hold a multidimensional ```vector``` (an 8x8).
-
-2.  Override the parentheses operator ```operator()``` so that it takes a row and column
-
-3.  Overload the ```ostream``` operator to print out a chessboard.  You will need to read documentation on this.  Notice that ```ostream``` is not a method that goes in a class, but rather the global namespace (Why?).  You should print the board so that it looks like this (this is a sample; print yours with pieces wherever they are on the board):
-
-![Chessboard](./chessboard.png)
-
-4.  Overload the ```operator<``` so that it compares two instances of Chessboard and determines which one is bigger.  A "bigger" chess board is one that has more black pieces than white pieces.
-
+4.  Overload an ```ostream``` so that you can print a representation of en ```Enemy``` object.  It must follow the format ```name, hp, speed```, for instance, ```Flying Grizzywick, 200, .5```.  Note that ```ostream``` does not go inside of the class's namespace, but rather the global namespace.
 
